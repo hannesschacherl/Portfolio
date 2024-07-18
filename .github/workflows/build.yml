@@ -73,9 +73,9 @@ jobs:
       - name: Check if release exists
         id: check_release
         run: |
-          curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          "https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ github.ref_name }}" \
-          | jq -e .id > /dev/null || echo "RELEASE_NOT_FOUND" >> $GITHUB_ENV
+          response=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ github.ref_name }}")
+          echo "$response" | jq -e .id > /dev/null && echo "EXISTING_UPLOAD_URL=$(echo $response | jq -r .upload_url)" >> $GITHUB_ENV || echo "RELEASE_NOT_FOUND" >> $GITHUB_ENV
 
       - name: Create GitHub release
         if: env.RELEASE_NOT_FOUND == 'RELEASE_NOT_FOUND'
@@ -91,13 +91,16 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload docker image as release asset
+      - name: Set upload URL
         if: env.RELEASE_NOT_FOUND != 'RELEASE_NOT_FOUND'
+        run: echo "UPLOAD_URL=${{ env.EXISTING_UPLOAD_URL }}" >> $GITHUB_ENV
+
+      - name: Upload docker image as release asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url || github.event.release.upload_url }}
+          upload_url: ${{ steps.create_release.outputs.upload_url || env.UPLOAD_URL }}
           asset_path: ./Portfolio.tar
           asset_name: Portfolio.tar
           asset_content_type: application/gzip
