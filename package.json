@@ -10,7 +10,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@types/three": "^0.166.0",
     "nuxt": "^3.12.3",
+    "tailwindcss": "^3.4.6",
+    "three": "^0.166.1",
     "vue": "latest"
   }
 }
