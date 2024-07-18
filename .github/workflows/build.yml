@@ -51,10 +51,10 @@ jobs:
         uses: docker-practice/actions-setup-docker@master
 
       - name: Build docker image
-        run: docker build --pull --rm -f "docker/dockerfile" --tag "Portfolio/Portfolio:latest" .
+        run: docker build --pull --rm -f "docker/dockerfile" --tag "portfolio/portfolio:latest" .
 
       - name: save docker image
-        run: docker save -o Portfolio.tar Portfolio/Portfolio:latest
+        run: docker save -o Portfolio.tar portfolio/portfolio:latest
 
       - name: Upload docker image
         uses: actions/upload-artifact@v4
