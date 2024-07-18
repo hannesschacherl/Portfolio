@@ -93,14 +93,16 @@ jobs:
 
       - name: Set upload URL
         if: env.RELEASE_NOT_FOUND != 'true'
-        run: echo "UPLOAD_URL=${{ env.EXISTING_UPLOAD_URL }}" >> $GITHUB_ENV
+        run: |
+          echo "UPLOAD_URL=${{ env.EXISTING_UPLOAD_URL }}" >> $GITHUB_ENV
 
       - name: Upload docker image as release asset
+        if: env.RELEASE_NOT_FOUND != 'true' || steps.create_release.outputs.upload_url != ''
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url || env.UPLOAD_URL }}
+          upload_url: ${{ env.UPLOAD_URL || steps.create_release.outputs.upload_url }}
           asset_path: ./Portfolio.tar
           asset_name: Portfolio.tar
           asset_content_type: application/gzip
