@@ -51,16 +51,16 @@ jobs:
         uses: docker-practice/actions-setup-docker@master
 
       - name: Build docker image
-        run: docker build --pull --rm -f "docker/dockerfile" --tag "portfolio/portfolio:latest" .
+        run: docker build --pull --rm -f "docker/dockerfile" --tag "portfolios/portfolio:latest" .
 
       - name: save docker image
-        run: docker save -o Portfolio.tar portfolio/portfolio:latest
+        run: docker save -o portfolio.tar portfolios/portfolio:latest
 
       - name: Upload docker image
         uses: actions/upload-artifact@v4
         with:
-          name: Portfolio.tar
-          path: ./Portfolio.tar
+          name: portfolio.tar
+          path: ./portfolio.tar
 
   release:
     runs-on: ubuntu-22.04
@@ -69,7 +69,7 @@ jobs:
       - name: Download docker image
         uses: actions/download-artifact@v4
         with:
-          name: Portfolio.tar
+          name: portfolio.tar
 
       - name: Create GitHub release
         uses: actions/create-release@v1
@@ -90,8 +90,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Portfolio.tar
-          asset_name: Portfolio.tar
+          asset_path: ./portfolio.tar
+          asset_name: portfolio.tar
           asset_content_type: application/gzip
 
   delete-artifacts:
@@ -102,6 +102,6 @@ jobs:
         with:
           name: |
             production-bundle
-            Portfolio.tar
+            portfolio.tar
           failOnError: false
 
