@@ -1,6 +1,6 @@
 <template>
     <div
-        class="container mx-auto lg:px-32 h-[700px] pb-6 flex items-center justify-center"
+        class="container mx-auto p-2 lg:px-32 h-[700px] pb-6 flex items-center justify-center"
     >
         <div
             class="w-full h-full max-w-[800px] gap-4 grid grid-rows-7 grid-cols-2 md:grid md:grid-rows-6 md:grid-cols-3"
@@ -31,67 +31,111 @@
 import gsap from 'gsap';
 
 onMounted(() => {
-  const container = document.querySelector('.fullpage');
+    const container = document.querySelector('.fullpage');
 
-  const mm = gsap.matchMedia();
+    const mm = gsap.matchMedia();
 
-  mm.add('(min-width: 768px)', () => {
-    const tl = gsap.timeline({
-      onStart: () => {
-        if(container)container.classList.add('overflow-hidden')
-      },
-      onComplete: () => {
-        if(container)container.classList.remove('overflow-hidden')
-      },
+    mm.add('(min-width: 768px)', () => {
+        const tl = gsap.timeline({
+            onStart: () => {
+                if (container) container.classList.add('overflow-hidden');
+            },
+            onComplete: () => {
+                if (container) container.classList.remove('overflow-hidden');
+            },
+        });
+
+        tl.add(
+            gsap.from('.container3', {
+                duration: 0.2,
+                ease: 'expoScale(0.5,7,none)',
+            }),
+        );
+        tl.add(
+            gsap.from('.container1', {
+                duration: 0.25,
+                y: -100,
+                opacity: 0,
+                ease: 'ease-in',
+            }),
+        );
+        tl.add(
+            gsap.from('.container2', {
+                duration: 0.25,
+                x: 100,
+                opacity: 0,
+                ease: 'ease-in',
+            }),
+        );
+        tl.add(
+            gsap.from('.container4', {
+                duration: 0.25,
+                y: 100,
+                opacity: 0,
+                ease: 'ease-in',
+            }),
+        );
+        tl.add(
+            gsap.from('.container6', {
+                duration: 0.25,
+                x: -100,
+                opacity: 0,
+                ease: 'ease-in',
+            }),
+        );
+        tl.add(
+            gsap.from('.container5', {
+                duration: 0.25,
+                x: -100,
+                opacity: 0,
+                ease: 'ease-in',
+            }),
+        );
     });
 
-    tl.add(
-      gsap.from('.container3', {
-        duration: 0.2,
-        ease: "expoScale(0.5,7,none)",
-      })
-    );
-    tl.add(
-      gsap.from('.container1', {
-        duration: 0.25,
-        y: -100,
-        opacity: 0,
-        ease: 'ease-in',
-      })
-    );
-    tl.add(
-      gsap.from('.container2', {
-        duration: 0.25,
-        x: 100,
-        opacity: 0,
-        ease: 'ease-in',
-      })
-    );
-    tl.add(
-      gsap.from('.container4', {
-        duration: 0.25,
-        y: 100,
-        opacity: 0,
-        ease: 'ease-in',
-      })
-    );
-    tl.add(
-      gsap.from('.container6', {
-        duration: 0.25,
-        x: -100,
-        opacity: 0,
-        ease: 'ease-in',
-      })
-    );
-    tl.add(
-      gsap.from('.container5', {
-        duration: 0.25,
-        x: -100,
-        opacity: 0,
-        ease: 'ease-in',
-      })
-    );
-  });
+    mm.add('(min-width: 350px) and (max-width: 767px)', () => {
+        const tl = gsap.timeline({
+            onStart: () => {
+                if (container) container.classList.add('overflow-hidden');
+            },
+            onComplete: () => {
+                if (container) container.classList.remove('overflow-hidden');
+            },
+        });
+
+        tl.add(
+            gsap.from('.container1', {
+                duration: 0.3,
+                x: -100,
+                opacity: 0,
+                ease: 'ease-in',
+            }),
+        )
+            .add(
+                gsap.from('.container3', {
+                    duration: 0.3,
+                    y: -100,
+                    opacity: 0,
+                    ease: 'ease-in',
+                }),
+            )
+            .add(
+                gsap.from('.container5', {
+                    duration: 0.3,
+                    x: 100,
+                    opacity: 0,
+                    ease: 'ease-in',
+                }),
+            )
+            .add(
+                gsap.from('.container4', {
+                    duration: 0.3,
+                    y: 100,
+                    opacity: 0,
+                    ease: 'ease-in',
+                }),
+            );
+    });
 });
 </script>
 
