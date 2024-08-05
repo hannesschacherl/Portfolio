@@ -29,8 +29,9 @@
 
 <script setup lang="ts">
 import gsap from 'gsap';
-var tl = gsap.timeline();
+
 onMounted(() => {
+    var tl = gsap.timeline();
     const mm = gsap.matchMedia();
 
     mm.add('(min-width: 768px)', () => {
