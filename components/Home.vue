@@ -11,15 +11,55 @@
             <div
                 class="container2 rounded-2xl bg-white shadow-md dark:bg-[#3D3D3D] hidden md:row-span-2 md:col-span-2 md:block"
             ></div>
-            <div
-                class="container3 bg-white shadow-md dark:bg-[#3D3D3D] rounded-2xl row-span-2 md:row-span-2"
-            ></div>
+            <a
+                class="container3 select-none cursor-pointer bg-white shadow-md dark:bg-[#3D3D3D] rounded-2xl row-span-2 md:row-span-2"
+                href="https://github.com/hannesschacherl"
+                target="_blank"
+            >
+                <div
+                    class="w-full h-full p-2 flex flex-col gap-4 items-center justify-center"
+                >
+                    <img
+                        src="../public/github.png"
+                        alt="github"
+                        class="rounded-full w-14 h-14 md:w-20 md:h-20"
+                    />
+                    <div
+                        class="text-[#00DEDE] text-center text-2xl sm:text-3xl font-bold"
+                    >
+                        Hannes Schacherl
+                    </div>
+                </div>
+            </a>
             <div
                 class="container4 bg-white shadow-md dark:bg-[#3D3D3D] rounded-2xl row-start-4 row-span-4 col-span-2 md:row-span-4 md:row-start-3 md:col-start-3 md:col-span-1"
             ></div>
-            <div
-                class="container5 rounded-2xl bg-white shadow-md dark:bg-[#3D3D3D] md:col-start-1 md:row-start-4"
-            ></div>
+            <a
+                class="container5 gap-2 select-none text-center relative font-bold flex items-center justify-center text-2xl sm:text-4xl w-full h-full rounded-2xl shadow-md bg-[#00DEDE] md:col-start-1 md:row-start-4"
+                href="https://maps.app.goo.gl/z4jSG5gHPqTyjc3KA"
+                target="_blank"
+            >
+                <svg
+                class=""
+                    version="1.0"
+                    id="Layer_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    width="46px"
+                    viewBox="0 0 64 64"
+                    enable-background="new 0 0 64 64"
+                    xml:space="preserve"
+                >
+                    <path
+                        fill="#231F20"
+                        d="M32,0C18.746,0,8,10.746,8,24c0,5.219,1.711,10.008,4.555,13.93c0.051,0.094,0.059,0.199,0.117,0.289l16,24
+	C29.414,63.332,30.664,64,32,64s2.586-0.668,3.328-1.781l16-24c0.059-0.09,0.066-0.195,0.117-0.289C54.289,34.008,56,29.219,56,24
+	C56,10.746,45.254,0,32,0z M32,32c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S36.418,32,32,32z"
+                    />
+                </svg>
+                Fürth
+
+            </a>
             <div
                 class="container6 rounded-2xl bg-white shadow-md dark:bg-[#3D3D3D] hidden md:block md:row-span-2 md:col-span-2"
             ></div>
