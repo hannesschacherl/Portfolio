@@ -1,6 +1,9 @@
 <template>
-    <div class="h-screen w-screen bg-[#D9D9D9] dark:bg-[#1B1B1B]">
+    <div class="h-screen min-h-[800px] w-screen bg-[#D9D9D9] dark:bg-[#1B1B1B] flex flex-col gap-6">
         <NavBar :activePage="activePage" @update:activePage="activePageUpdate"/>
+        <div class="flex-grow"></div>
+        <Home />
+        <div class="flex-grow"></div>
     </div>
 </template>
 
