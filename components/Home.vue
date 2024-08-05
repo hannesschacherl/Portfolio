@@ -31,57 +31,67 @@
 import gsap from 'gsap';
 
 onMounted(() => {
-    var tl = gsap.timeline();
-    const mm = gsap.matchMedia();
+  const container = document.querySelector('.container');
 
-    mm.add('(min-width: 768px)', () => {
-        tl.add(
-            gsap.from('.container3', {
-                duration: 0.2,
-                ease: "expoScale(0.5,7,none)",
-            }),
-        );
-        tl.add(
-            gsap.from('.container1', {
-                duration:0.25,
-                y: -100,
-                opacity: 0,
-                ease: 'ease-in',
-            }),
-        );
-        tl.add(
-            gsap.from('.container2', {
-                duration:0.25,
-                x: 100,
-                opacity: 0,
-                ease: 'ease-in',
-            }),
-        )
-        tl.add(
-            gsap.from('.container4', {
-                duration:0.25,
-                y: 100,
-                opacity: 0,
-                ease: 'ease-in',
-            }),
-        );
-        tl.add(
-            gsap.from('.container6', {
-                duration:0.25,
-                x: -100,
-                opacity: 0,
-                ease: 'ease-in',
-            }),
-        );
-        tl.add(
-            gsap.from('.container5', {
-                duration:0.25,
-                x: -100,
-                opacity: 0,
-                ease: 'ease-in',
-            }),
-        );
+  const mm = gsap.matchMedia();
+
+  mm.add('(min-width: 768px)', () => {
+    const tl = gsap.timeline({
+      onStart: () => {
+        if(container)container.classList.add('overflow-hidden')
+      },
+      onComplete: () => {
+        if(container)container.classList.remove('overflow-hidden')
+      },
     });
+
+    tl.add(
+      gsap.from('.container3', {
+        duration: 0.2,
+        ease: "expoScale(0.5,7,none)",
+      })
+    );
+    tl.add(
+      gsap.from('.container1', {
+        duration: 0.25,
+        y: -100,
+        opacity: 0,
+        ease: 'ease-in',
+      })
+    );
+    tl.add(
+      gsap.from('.container2', {
+        duration: 0.25,
+        x: 100,
+        opacity: 0,
+        ease: 'ease-in',
+      })
+    );
+    tl.add(
+      gsap.from('.container4', {
+        duration: 0.25,
+        y: 100,
+        opacity: 0,
+        ease: 'ease-in',
+      })
+    );
+    tl.add(
+      gsap.from('.container6', {
+        duration: 0.25,
+        x: -100,
+        opacity: 0,
+        ease: 'ease-in',
+      })
+    );
+    tl.add(
+      gsap.from('.container5', {
+        duration: 0.25,
+        x: -100,
+        opacity: 0,
+        ease: 'ease-in',
+      })
+    );
+  });
 });
 </script>
 
