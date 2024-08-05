@@ -31,7 +31,7 @@
 import gsap from 'gsap';
 
 onMounted(() => {
-  const container = document.querySelector('.container');
+  const container = document.querySelector('.fullpage');
 
   const mm = gsap.matchMedia();
 
