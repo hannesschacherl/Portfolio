@@ -11,7 +11,7 @@
                 <img
                     src="../public/Einstein2.png"
                     alt="Einstein"
-                    class="w-full h-full rounded-2xl object-cover"
+                    class="Portrait w-full h-full rounded-2xl object-cover"
                 />
             </div>
             <div
@@ -118,115 +118,138 @@
 
 <script setup lang="ts">
 import gsap from 'gsap';
+import { onMounted } from 'vue';
 
 onMounted(() => {
     const container = document.querySelector('.fullpage');
 
-    const mm = gsap.matchMedia();
+    const allImages = document.querySelectorAll('img');
+    let imagesLoaded = 0;
 
-    mm.add('(min-width: 768px)', () => {
-        const tl = gsap.timeline({
-            onStart: () => {
-                if (container) container.classList.add('overflow-hidden');
-            },
-            onComplete: () => {
-                if (container) container.classList.remove('overflow-hidden');
-            },
-        });
+    const checkAllImagesLoaded = () => {
+        imagesLoaded += 1;
+        if (imagesLoaded === allImages.length) {
+            startAnimations();
+        }
+    };
 
-        tl.add(
-            gsap.from('.container3', {
-                duration: 0.2,
-                ease: 'expoScale(0.5,7,none)',
-            }),
-        );
-        tl.add(
-            gsap.from('.container1', {
-                duration: 0.25,
-                y: -100,
-                opacity: 0,
-                ease: 'ease-in',
-            }),
-        );
-        tl.add(
-            gsap.from('.container2', {
-                duration: 0.25,
-                x: 100,
-                opacity: 0,
-                ease: 'ease-in',
-            }),
-        );
-        tl.add(
-            gsap.from('.container4', {
-                duration: 0.25,
-                y: 100,
-                opacity: 0,
-                ease: 'ease-in',
-            }),
-        );
-        tl.add(
-            gsap.from('.container6', {
-                duration: 0.25,
-                x: -100,
-                opacity: 0,
-                ease: 'ease-in',
-            }),
-        );
-        tl.add(
-            gsap.from('.container5', {
-                duration: 0.25,
-                x: -100,
-                opacity: 0,
-                ease: 'ease-in',
-            }),
-        );
-    });
+    const startAnimations = () => {
+        const mm = gsap.matchMedia();
 
-    mm.add('(min-width: 350px) and (max-width: 767px)', () => {
-        const tl = gsap.timeline({
-            onStart: () => {
-                if (container) container.classList.add('overflow-hidden');
-            },
-            onComplete: () => {
-                if (container) container.classList.remove('overflow-hidden');
-            },
-        });
+        mm.add('(min-width: 768px)', () => {
+            const tl = gsap.timeline({
+                onStart: () => {
+                    if (container) container.classList.add('overflow-hidden');
+                },
+                onComplete: () => {
+                    if (container) container.classList.remove('overflow-hidden');
+                },
+            });
 
-        tl.add(
-            gsap.from('.container1', {
-                duration: 0.3,
-                x: -100,
-                opacity: 0,
-                ease: 'ease-in',
-            }),
-        )
-            .add(
+            tl.add(
                 gsap.from('.container3', {
-                    duration: 0.3,
+                    duration: 0.2,
+                    ease: 'expoScale(0.5,7,none)',
+                }),
+            );
+            tl.add(
+                gsap.from(['.container1', '.container1 > *'], {
+                    duration: 0.25,
                     y: -100,
                     opacity: 0,
                     ease: 'ease-in',
                 }),
-            )
-            .add(
-                gsap.from('.container5', {
-                    duration: 0.3,
+            );
+            tl.add(
+                gsap.from('.container2', {
+                    duration: 0.25,
                     x: 100,
                     opacity: 0,
                     ease: 'ease-in',
                 }),
-            )
-            .add(
-                gsap.from('.container4', {
-                    duration: 0.3,
+            );
+            tl.add(
+                gsap.from(['.container4', '.container4 > *'], {
+                    duration: 0.25,
                     y: 100,
                     opacity: 0,
                     ease: 'ease-in',
                 }),
             );
+            tl.add(
+                gsap.from('.container6', {
+                    duration: 0.25,
+                    x: -100,
+                    opacity: 0,
+                    ease: 'ease-in',
+                }),
+            );
+            tl.add(
+                gsap.from('.container5', {
+                    duration: 0.25,
+                    x: -100,
+                    opacity: 0,
+                    ease: 'ease-in',
+                }),
+            );
+        });
+
+        mm.add('(min-width: 350px) and (max-width: 767px)', () => {
+            const tl = gsap.timeline({
+                onStart: () => {
+                    if (container) container.classList.add('overflow-hidden');
+                },
+                onComplete: () => {
+                    if (container) container.classList.remove('overflow-hidden');
+                },
+            });
+
+            tl.add(
+                gsap.from('.container1', {
+                    duration: 0.3,
+                    x: -100,
+                    opacity: 0,
+                    ease: 'ease-in',
+                }),
+            )
+                .add(
+                    gsap.from('.container3', {
+                        duration: 0.3,
+                        y: -100,
+                        opacity: 0,
+                        ease: 'ease-in',
+                    }),
+                )
+                .add(
+                    gsap.from('.container5', {
+                        duration: 0.3,
+                        x: 100,
+                        opacity: 0,
+                        ease: 'ease-in',
+                    }),
+                )
+                .add(
+                    gsap.from('.container4', {
+                        duration: 0.3,
+                        y: 100,
+                        opacity: 0,
+                        ease: 'ease-in',
+                    }),
+                );
+        });
+    };
+
+    allImages.forEach((img) => {
+        if (img.complete) {
+            checkAllImagesLoaded();
+        } else {
+            img.addEventListener('load', checkAllImagesLoaded);
+            img.addEventListener('error', checkAllImagesLoaded);
+        }
     });
 });
 </script>
+
 
 <style scoped>
 .bildungswegMd {
