@@ -1,7 +1,6 @@
 name: Build and Publish Docker Image
 
 on:
-  # create a tag
   push:
     tags:
       - 'v*'
@@ -20,7 +19,7 @@ jobs:
 
       - name: Configure npm for private packages
         run: |
-          echo "always-auth=true" >> ~/.npmrc
+          echo "always-auth=true" > ~/.npmrc
           echo "//npm.greensock.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
           echo "@gsap:registry=https://npm.greensock.com" >> ~/.npmrc
           echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
@@ -52,7 +51,7 @@ jobs:
 
       - name: Configure npm for private packages
         run: |
-          echo "always-auth=true" >> ~/.npmrc
+          echo "always-auth=true" > ~/.npmrc
           echo "//npm.greensock.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
           echo "@gsap:registry=https://npm.greensock.com" >> ~/.npmrc
           echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
