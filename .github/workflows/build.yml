@@ -18,6 +18,12 @@ jobs:
       - name: Install bun.js
         uses: oven-sh/setup-bun@v2
 
+      - name: Configure npm for private packages
+        run: |
+          echo "always-auth=true" >> ~/.npmrc
+          echo "//npm.greensock.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+          echo "@gsap:registry=https://npm.greensock.com" >> ~/.npmrc
+
       - name: Install dependencies
         run: bun i
 
@@ -43,6 +49,12 @@ jobs:
           name: production-bundle
           path: ./production-bundle
 
+      - name: Configure npm for private packages
+        run: |
+          echo "always-auth=true" >> ~/.npmrc
+          echo "//npm.greensock.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+          echo "@gsap:registry=https://npm.greensock.com" >> ~/.npmrc
+
       - run: ls -l
 
       - run: ls -l docker
@@ -53,7 +65,7 @@ jobs:
       - name: Build docker image
         run: docker build --pull --rm -f "docker/dockerfile" --tag "portfolios/portfolio:latest" .
 
-      - name: save docker image
+      - name: Save docker image
         run: docker save -o portfolio.tar portfolios/portfolio:latest
 
       - name: Upload docker image
@@ -104,4 +116,3 @@ jobs:
             production-bundle
             portfolio.tar
           failOnError: false
-

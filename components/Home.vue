@@ -1,12 +1,12 @@
 <template>
     <div
-        class="container mx-auto p-2 lg:px-32 h-[700px] pb-6 flex items-center justify-center"
+        class="container mx-auto p-2 lg:px-32 h-[700px] pb-6 flex items-center justify-center fullpage overflow-hidden"
     >
         <div
             class="w-full h-full max-w-[800px] gap-4 grid grid-rows-7 grid-cols-2 md:grid md:grid-rows-6 md:grid-cols-3"
         >
             <div
-                class="container1 rounded-2xl bg-white shadow-md dark:bg-[#3D3D3D] row-span-3 md:row-span-3"
+                class="container1 transform -translate-y-24 opacity-0 rounded-2xl bg-white shadow-md dark:bg-[#3D3D3D] row-span-3 md:row-span-3"
             >
                 <img
                     src="../public/Einstein2.png"
@@ -15,14 +15,14 @@
                 />
             </div>
             <div
-                class="container2 p-4 rounded-2xl bg-white shadow-md dark:bg-[#3D3D3D] hidden md:row-span-2 md:col-span-2 md:block"
+                class="container2 transform translate-x-24 opacity-0 p-4 rounded-2xl bg-white shadow-md dark:bg-[#3D3D3D] hidden md:row-span-2 md:col-span-2 md:block"
             >
                 <div class="text-4xl text-black dark:text-white font-bold">
                     Über mich
                 </div>
             </div>
             <a
-                class="container3 select-none cursor-pointer bg-white shadow-md dark:bg-[#3D3D3D] rounded-2xl row-span-2 md:row-span-2"
+                class="container3 transform scale-50 opacity-0 select-none cursor-pointer bg-white shadow-md dark:bg-[#3D3D3D] rounded-2xl row-span-2 md:row-span-2"
                 href="https://github.com/hannesschacherl"
                 target="_blank"
             >
@@ -42,7 +42,7 @@
                 </div>
             </a>
             <div
-                class="container4 bg-white shadow-md dark:bg-[#3D3D3D] rounded-2xl row-start-4 row-span-4 col-span-2 md:row-span-4 md:row-start-3 md:col-start-3 md:col-span-1 XsPictureStyle"
+                class="container4 transform translate-y-24 opacity-0 bg-white shadow-md dark:bg-[#3D3D3D] rounded-2xl row-start-4 row-span-4 col-span-2 md:row-span-4 md:row-start-3 md:col-start-3 md:col-span-1 XsPictureStyle"
             >
                 <div class="w-full h-full hidden dark:block">
                     <img
@@ -81,7 +81,7 @@
                 </div>
             </div>
             <a
-                class="container5 gap-2 select-none text-center relative font-bold flex items-center justify-center text-2xl sm:text-4xl w-full h-full rounded-2xl shadow-md bg-[#00DEDE] md:col-start-1 md:row-start-4"
+                class="container5 transform -translate-x-24 opacity-0 gap-2 select-none text-center relative font-bold flex items-center justify-center text-2xl sm:text-4xl w-full h-full rounded-2xl shadow-md bg-[#00DEDE] md:col-start-1 md:row-start-4"
                 href="https://maps.app.goo.gl/z4jSG5gHPqTyjc3KA"
                 target="_blank"
             >
@@ -106,7 +106,7 @@
                 Fürth
             </a>
             <div
-                class="container6 p-4 rounded-2xl bg-white shadow-md dark:bg-[#3D3D3D] hidden md:block md:row-span-2 md:col-span-2"
+                class="container6 transform -translate-x-24 opacity-0 p-4 rounded-2xl bg-white shadow-md dark:bg-[#3D3D3D] hidden md:block md:row-span-2 md:col-span-2"
             >
                 <div class="text-4xl text-black dark:text-white font-bold">
                     Verwendete Technologien
@@ -122,7 +122,6 @@ import { onMounted } from 'vue';
 
 onMounted(() => {
     const container = document.querySelector('.fullpage');
-
     const allImages = document.querySelectorAll('img');
     let imagesLoaded = 0;
 
@@ -139,103 +138,85 @@ onMounted(() => {
         mm.add('(min-width: 768px)', () => {
             const tl = gsap.timeline({
                 onStart: () => {
-                    if (container) container.classList.add('overflow-hidden');
+                    container?.classList.add('overflow-hidden');
                 },
                 onComplete: () => {
-                    if (container) container.classList.remove('overflow-hidden');
+                    container?.classList.remove('overflow-hidden');
                 },
             });
 
-            tl.add(
-                gsap.from('.container3', {
-                    duration: 0.2,
-                    ease: 'expoScale(0.5,7,none)',
-                }),
-            );
-            tl.add(
-                gsap.from(['.container1', '.container1 > *'], {
-                    duration: 0.25,
-                    y: -100,
-                    opacity: 0,
-                    ease: 'ease-in',
-                }),
-            );
-            tl.add(
-                gsap.from('.container2', {
-                    duration: 0.25,
-                    x: 100,
-                    opacity: 0,
-                    ease: 'ease-in',
-                }),
-            );
-            tl.add(
-                gsap.from(['.container4', '.container4 > *'], {
-                    duration: 0.25,
-                    y: 100,
-                    opacity: 0,
-                    ease: 'ease-in',
-                }),
-            );
-            tl.add(
-                gsap.from('.container6', {
-                    duration: 0.25,
-                    x: -100,
-                    opacity: 0,
-                    ease: 'ease-in',
-                }),
-            );
-            tl.add(
-                gsap.from('.container5', {
-                    duration: 0.25,
-                    x: -100,
-                    opacity: 0,
-                    ease: 'ease-in',
-                }),
-            );
+            tl.to('.container3', {
+                duration: 0.3,
+                scale: 1,
+                opacity: 1,
+                ease: 'expoScale(0.5, 7, none)',
+            })
+            .to(['.container1', '.container1 > *'], {
+                duration: 0.25,
+                y: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            })
+            .to('.container2', {
+                duration: 0.25,
+                x: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            })
+            .to(['.container4', '.container4 > *'], {
+                duration: 0.25,
+                y: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            })
+            .to('.container6', {
+                duration: 0.25,
+                x: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            })
+            .to('.container5', {
+                duration: 0.25,
+                x: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            });
         });
 
         mm.add('(min-width: 350px) and (max-width: 767px)', () => {
             const tl = gsap.timeline({
                 onStart: () => {
-                    if (container) container.classList.add('overflow-hidden');
+                    container?.classList.add('overflow-hidden');
                 },
                 onComplete: () => {
-                    if (container) container.classList.remove('overflow-hidden');
+                    container?.classList.remove('overflow-hidden');
                 },
             });
 
-            tl.add(
-                gsap.from('.container1', {
-                    duration: 0.3,
-                    x: -100,
-                    opacity: 0,
-                    ease: 'ease-in',
-                }),
-            )
-                .add(
-                    gsap.from('.container3', {
-                        duration: 0.3,
-                        y: -100,
-                        opacity: 0,
-                        ease: 'ease-in',
-                    }),
-                )
-                .add(
-                    gsap.from('.container5', {
-                        duration: 0.3,
-                        x: 100,
-                        opacity: 0,
-                        ease: 'ease-in',
-                    }),
-                )
-                .add(
-                    gsap.from('.container4', {
-                        duration: 0.3,
-                        y: 100,
-                        opacity: 0,
-                        ease: 'ease-in',
-                    }),
-                );
+            tl.to('.container1', {
+                duration: 0.3,
+                x: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            })
+            .to('.container3', {
+                duration: 0.3,
+                y: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            })
+            .to('.container5', {
+                duration: 0.3,
+                x: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            })
+            .to('.container4', {
+                duration: 0.3,
+                y: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            });
         });
     };
 
@@ -249,7 +230,6 @@ onMounted(() => {
     });
 });
 </script>
-
 
 <style scoped>
 .bildungswegMd {
