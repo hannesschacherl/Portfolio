@@ -1,9 +1,7 @@
 <template>
     <div class="fullpage h-screen min-h-[800px] w-screen bg-[#D9D9D9] dark:bg-[#1B1B1B] flex flex-col gap-6">
-        <NavBar :activePage="activePage" @update:activePage="activePageUpdate"/>
-        <div class="flex-grow"></div>
+        <NavBar class="" :activePage="activePage" @update:activePage="activePageUpdate"/>
         <Home />
-        <div class="flex-grow"></div>
     </div>
 </template>
 
@@ -15,5 +13,4 @@ const activePageUpdate = (value: string) => {
 </script>
 
 <style scoped>
-
 </style>
