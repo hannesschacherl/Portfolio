@@ -244,7 +244,7 @@ const startAnimations = () => {
             );
     });
 
-    mm.add('(min-width: 350px) and (max-width: 767px)', () => {
+    mm.add('(min-width: 340px) and (max-width: 767px)', () => {
         const tl = gsap.timeline({
             onStart: () => {
                 container?.classList.add('overflow-hidden');
