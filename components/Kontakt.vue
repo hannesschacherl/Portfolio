@@ -1,12 +1,12 @@
 <template>
     <div
-        class="w-screen h-screen flex-col text-black grid grid-cols-1 md:grid-cols-2 items-center justify-center"
+        class="w-screen h-screen flex-col text-black grid grid-cols-1 md:grid-cols-2 md:items-center md:justify-center"
     >
-        <div class="w-full h-full flex items-center justify-center">
+        <div class="w-full h-full flex md:items-center justify-center">
             <form
                 method="POST"
                 id="form"
-                class="flex flex-col h-full w-5/6 items-center justify-center gap-6"
+                class="flex flex-col h-max w-5/6 items-center justify-center gap-6"
             >
                 <input
                     type="hidden"
