@@ -123,14 +123,26 @@
                     >
                         Verwendete Technologien
                     </div>
-                    <div class="grid grid-cols-5 items-center justify-center h-[calc(100%-40px)] w-full">
-                        <div v-for="technology in technologies" :key="technology" class="flex items-center justify-center">
-                        <img
-                            :src="`/tech/${technology}`"
-                            alt="technology"
-                            class="w-12 h-12 md:w-12 md:h-12 cursor-pointer"
-                        />
-                    </div>
+                    <div
+                        class="grid grid-cols-5 items-center justify-center h-[calc(100%-40px)] w-full"
+                    >
+                        <div
+                            v-for="technology in technologies"
+                            :key="technology.name"
+                            class="flex items-center justify-center technology opacity-0"
+                        >
+                            <a
+                                :href="technology.url"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <img
+                                    :src="`/tech/${technology.icon}`"
+                                    alt="technology.name"
+                                    class="w-12 h-12 md:w-12 md:h-12 cursor-pointer"
+                                />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -143,16 +155,24 @@ import gsap from 'gsap';
 import { onMounted } from 'vue';
 
 const technologies = ref([
-  'vue.svg',
-  'nuxt.svg',
-  'javascript.svg',
-  'typescript.svg',
-  'python.svg',
-  'java.svg',
-  'git.svg',
-  'docker.svg',
-  'github.svg',
-  'gitlab.svg'
+    { name: 'Nuxt', icon: 'nuxt.svg', url: 'https://nuxtjs.org/' },
+    {
+        name: 'JavaScript',
+        icon: 'javascript.svg',
+        url: 'https://www.javascript.com/',
+    },
+    { name: 'Python', icon: 'python.svg', url: 'https://www.python.org/' },
+    { name: 'Git', icon: 'git.svg', url: 'https://git-scm.com/' },
+    { name: 'GitHub', icon: 'github.svg', url: 'https://github.com/' },
+    { name: 'Vue', icon: 'vue.svg', url: 'https://vuejs.org/' },
+    {
+        name: 'TypeScript',
+        icon: 'typescript.svg',
+        url: 'https://www.typescriptlang.org/',
+    },
+    { name: 'Java', icon: 'java.svg', url: 'https://www.java.com/' },
+    { name: 'Docker', icon: 'docker.svg', url: 'https://www.docker.com/' },
+    { name: 'GitLab', icon: 'gitlab.svg', url: 'https://gitlab.com/' },
 ]);
 
 onMounted(() => {
@@ -234,7 +254,17 @@ onMounted(() => {
                     x: 0,
                     opacity: 1,
                     ease: 'ease-in',
-                });
+                })
+                .add(
+                    gsap.to('.technology', {
+                        duration: 0.3,
+                        x: 0,
+                        opacity: 1,
+                        ease: 'ease-in',
+                        stagger: 0.2,
+                    }),
+                    '-=0.15',
+                );
         });
 
         mm.add('(min-width: 350px) and (max-width: 767px)', () => {
