@@ -71,7 +71,6 @@
                             class="bildungswegXs h-full p-4 md:hidden"
                         />
                     </div>
-
                     <div class="w-full h-full dark:hidden">
                         <img
                             src="../public/LightBildung.svg"
@@ -108,9 +107,7 @@
                     >
                         <path
                             fill="#231F20"
-                            d="M32,0C18.746,0,8,10.746,8,24c0,5.219,1.711,10.008,4.555,13.93c0.051,0.094,0.059,0.199,0.117,0.289l16,24
-    C29.414,63.332,30.664,64,32,64s2.586-0.668,3.328-1.781l16-24c0.059-0.09,0.066-0.195,0.117-0.289C54.289,34.008,56,29.219,56,24
-    C56,10.746,45.254,0,32,0z M32,32c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S36.418,32,32,32z"
+                            d="M32,0C18.746,0,8,10.746,8,24c0,5.219,1.711,10.008,4.555,13.93c0.051,0.094,0.059,0.199,0.117,0.289l16,24 C29.414,63.332,30.664,64,32,64s2.586-0.668,3.328-1.781l16-24c0.059-0.09,0.066-0.195,0.117-0.289C54.289,34.008,56,29.219,56,24 C56,10.746,45.254,0,32,0z M32,32c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S36.418,32,32,32z"
                         />
                     </svg>
                     Fürth
@@ -152,7 +149,7 @@
 
 <script setup lang="ts">
 import gsap from 'gsap';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const technologies = ref([
     { name: 'Nuxt', icon: 'nuxt.svg', url: 'https://nuxtjs.org/' },
@@ -175,14 +172,144 @@ const technologies = ref([
     { name: 'GitLab', icon: 'gitlab.svg', url: 'https://gitlab.com/' },
 ]);
 
-onMounted(() => {
+const resetElementsState = () => {
+    gsap.set('.container1', { y: -96, opacity: 0 });
+    gsap.set('.container2', { x: 96, opacity: 0 });
+    gsap.set('.container3', { scale: 0.5, opacity: 0 });
+    gsap.set('.container4', { y: 96, opacity: 0 });
+    gsap.set('.container5', { x: -96, opacity: 0 });
+    gsap.set('.container6', { x: -96, opacity: 0 });
+    gsap.set('.technology', { opacity: 0, x: -16 });
+};
+
+const startAnimations = () => {
     const container = document.querySelector('.entirePage');
+    const mm = gsap.matchMedia();
+
+    mm.add('(min-width: 768px)', () => {
+        const tl = gsap.timeline({
+            onStart: () => {
+                container?.classList.add('overflow-hidden');
+            },
+            onComplete: () => {
+                container?.classList.remove('overflow-hidden');
+            },
+        });
+
+        tl.to('.container3', {
+            duration: 0.5,
+            scale: 1,
+            opacity: 1,
+            ease: 'expoScale(0.5, 7, none)',
+        })
+            .to('.container1', {
+                duration: 0.3,
+                y: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            })
+            .to('.container2', {
+                duration: 0.3,
+                x: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            })
+            .to(['.container4', '.container4 > *'], {
+                duration: 0.3,
+                y: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            })
+            .to('.container6', {
+                duration: 0.3,
+                x: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            })
+            .to('.container5', {
+                duration: 0.3,
+                x: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            })
+            .add(
+                gsap.to('.technology', {
+                    duration: 0.3,
+                    x: 0,
+                    opacity: 1,
+                    ease: 'ease-in',
+                    stagger: 0.1,
+                }),
+                '-=0.15',
+            );
+    });
+
+    mm.add('(min-width: 350px) and (max-width: 767px)', () => {
+        const tl = gsap.timeline({
+            onStart: () => {
+                container?.classList.add('overflow-hidden');
+            },
+            onComplete: () => {
+                container?.classList.remove('overflow-hidden');
+            },
+        });
+
+        tl.fromTo(
+            '.container1',
+            {
+                y: -50,
+                opacity: 0,
+            },
+            {
+                duration: 0.3,
+                y: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            },
+        )
+            .fromTo(
+                '.container3',
+                {
+                    scale: 0.5,
+                    opacity: 0,
+                },
+                {
+                    duration: 0.5,
+                    scale: 1,
+                    opacity: 1,
+                    ease: 'expoScale(0.5, 7, none)',
+                },
+            )
+            .fromTo(
+                '.container5',
+                {
+                    x: 50,
+                    opacity: 0,
+                },
+                {
+                    duration: 0.3,
+                    x: 0,
+                    opacity: 1,
+                    ease: 'ease-in',
+                },
+            )
+            .to('.container4', {
+                duration: 0.3,
+                y: 0,
+                opacity: 1,
+                ease: 'ease-in',
+            });
+    });
+};
+
+onMounted(() => {
     const allImages = document.querySelectorAll('img');
     let imagesLoaded = 0;
 
     const checkAllImagesLoaded = () => {
         imagesLoaded += 1;
         if (imagesLoaded === allImages.length) {
+            resetElementsState();
             observeElements();
         }
     };
@@ -201,128 +328,6 @@ onMounted(() => {
             '.container1, .container2, .container3, .container4, .container5, .container6',
         );
         elements.forEach((el) => observer.observe(el));
-        console.log('1');
-    };
-
-    const startAnimations = () => {
-        console.log('2');
-
-        const mm = gsap.matchMedia();
-
-        mm.add('(min-width: 768px)', () => {
-            const tl = gsap.timeline({
-                onStart: () => {
-                    container?.classList.add('overflow-hidden');
-                },
-                onComplete: () => {
-                    container?.classList.remove('overflow-hidden');
-                },
-            });
-
-            tl.to('.container3', {
-                duration: 0.5,
-                scale: 1,
-                opacity: 1,
-                ease: 'expoScale(0.5, 7, none)',
-            })
-                .to('.container1', {
-                    duration: 0.3,
-                    y: 0,
-                    opacity: 1,
-                    ease: 'ease-in',
-                })
-                .to('.container2', {
-                    duration: 0.3,
-                    x: 0,
-                    opacity: 1,
-                    ease: 'ease-in',
-                })
-                .to(['.container4', '.container4 > *'], {
-                    duration: 0.3,
-                    y: 0,
-                    opacity: 1,
-                    ease: 'ease-in',
-                })
-                .to('.container6', {
-                    duration: 0.3,
-                    x: 0,
-                    opacity: 1,
-                    ease: 'ease-in',
-                })
-                .to('.container5', {
-                    duration: 0.3,
-                    x: 0,
-                    opacity: 1,
-                    ease: 'ease-in',
-                })
-                .add(
-                    gsap.to('.technology', {
-                        duration: 0.3,
-                        x: 0,
-                        opacity: 1,
-                        ease: 'ease-in',
-                        stagger: 0.2,
-                    }),
-                    '-=0.15',
-                );
-        });
-
-        mm.add('(min-width: 350px) and (max-width: 767px)', () => {
-            const tl = gsap.timeline({
-                onStart: () => {
-                    container?.classList.add('overflow-hidden');
-                },
-                onComplete: () => {
-                    container?.classList.remove('overflow-hidden');
-                },
-            });
-
-            tl.fromTo(
-                '.container1',
-                {
-                    y: -50,
-                    opacity: 0,
-                },
-                {
-                    duration: 0.3,
-                    y: 0,
-                    opacity: 1,
-                    ease: 'ease-in',
-                },
-            )
-                .fromTo(
-                    '.container3',
-                    {
-                        scale: 0.5,
-                        opacity: 0,
-                    },
-                    {
-                        duration: 0.5,
-                        scale: 1,
-                        opacity: 1,
-                        ease: 'expoScale(0.5, 7, none)',
-                    },
-                )
-                .fromTo(
-                    '.container5',
-                    {
-                        x: 50,
-                        opacity: 0,
-                    },
-                    {
-                        duration: 0.3,
-                        x: 0,
-                        opacity: 1,
-                        ease: 'ease-in',
-                    },
-                )
-                .to('.container4', {
-                    duration: 0.3,
-                    y: 0,
-                    opacity: 1,
-                    ease: 'ease-in',
-                });
-        });
     };
 
     allImages.forEach((img) => {
@@ -333,12 +338,13 @@ onMounted(() => {
             img.addEventListener('error', checkAllImagesLoaded);
         }
     });
+
     const oldSize = ref(window.innerWidth);
     const resizeEvent = () => {
-        if (window.innerWidth < 768 && oldSize.value >= 768) {
-            window.location.reload();
-        }
-        if (window.innerWidth >= 768 && oldSize.value < 768) {
+        if (
+            (window.innerWidth < 768 && oldSize.value >= 768) ||
+            (window.innerWidth >= 768 && oldSize.value < 768)
+        ) {
             window.location.reload();
         }
         oldSize.value = window.innerWidth;

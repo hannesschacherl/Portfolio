@@ -1,22 +1,24 @@
 <template>
     <div
-        class="overflow-hidden entirePage h-screen min-h-[800px] w-screen bg-[#D9D9D9] dark:bg-[#1B1B1B] flex flex-col gap-6"
+        class="overflow-x-hidden entirePage h-screen min-h-[800px] w-screen bg-[#D9D9D9] dark:bg-[#1B1B1B] flex flex-col gap-6"
     >
         <NavBar
             class=""
             :activePage="activePage"
             @update:activePage="activePageUpdate"
         />
-        <Home id="home" />
+        <Kontakt id="kontakt" />
     </div>
 </template>
 
 <script setup lang="ts">
 import gsap from 'gsap';
-const activePage = ref('Start');
+import { onMounted, ref } from 'vue';
+const activePage = ref('Kontakt');
 const activePageUpdate = (value: string) => {
     activePage.value = value;
-    if (value === 'Kontakt') {
+
+    if (value === 'Start') {
         fadeOutRef.value();
     }
 };
@@ -24,18 +26,21 @@ const activePageUpdate = (value: string) => {
 const fadeOutRef = ref(() => {})
 
 onMounted(() => {
+
+    gsap.fromTo('#kontakt', { x: '100%' }, { x: '0%', duration: 0.5 });
+
     const fadeOut = () => {
-        gsap.to('#home', { 
-            x: '-100%',
+        gsap.to('#kontakt', { 
+            x: '100%',
             duration: 0.5,
             onComplete: () => {
-                navigateTo('/Kontakt');
+                navigateTo('/');
             },
         });
-    };
+    }
 
     fadeOutRef.value = fadeOut;
-});
+})
 </script>
 
 <style scoped></style>
