@@ -1,12 +1,13 @@
 <template>
-  <div class="overflow-x-hidden overflow-y-auto bg-[#D9D9D9] dark:bg-[#1B1B1B] h-screen w-screen">
+  <div class="bg overflow-x-hidden overflow-y-auto bg-[#D9D9D9] dark:bg-[#1B1B1B] h-screen w-screen">
     <NavBar
             class=""
             :activePage="activePage"
             @update:activePage="activePageUpdate"
     />
-    <NuxtPage />
+    <NuxtPage/>
   </div>
+
 </template>
 
 <script setup lang="ts">
@@ -72,7 +73,7 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
+<style>
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
