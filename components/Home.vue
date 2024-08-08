@@ -1,7 +1,7 @@
 <template>
-    <div class="w-full h-full flex items-center">
-      <div class="container mx-auto p-2 lg:px-32 h-[700px] pb-6 flex items-center justify-center">
-        <div class="w-full h-full max-w-[800px] gap-4 grid grid-rows-7 grid-cols-2 md:grid md:grid-rows-6 md:grid-cols-3">
+    <div class="w-full h-full flex items-center justify-center">
+      <div class="container mx-auto p-6 md:p-2 lg:px-32 h-[700px] pb-6 flex items-center justify-center">
+        <div class="h-full max-w-[800px] gap-4 grid grid-rows-7 grid-cols-2 md:grid md:grid-rows-6 md:grid-cols-3">
           <div class="container1 transform -translate-y-24 opacity-0 rounded-2xl bg-white shadow-md dark:bg-[#3D3D3D] row-span-3 md:row-span-3">
             <img
               src="../public/Einstein2.png"

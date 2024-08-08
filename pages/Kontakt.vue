@@ -1,12 +1,7 @@
 <template>
     <div
-        class="overflow-x-hidden entirePage h-screen p-2 min-h-[800px] w-screen bg-[#D9D9D9] dark:bg-[#1B1B1B] flex flex-col gap-6"
+        class="overflow-x-hidden entirePage h-[calc(100vh-80px)] min-h-[700px] w-screen bg-[#D9D9D9] dark:bg-[#1B1B1B] flex items-center justify-center"
     >
-        <NavBar
-            class=""
-            :activePage="activePage"
-            @update:activePage="activePageUpdate"
-        />
         <Kontakt id="kontakt" />
     </div>
 </template>

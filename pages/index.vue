@@ -1,12 +1,7 @@
 <template>
     <div
-        class="overflow-hidden entirePage h-screen min-h-[800px] w-screen bg-[#D9D9D9] dark:bg-[#1B1B1B] flex flex-col gap-6"
+        class="overflow-hidden entirePage h-[calc(100vh-80px)] min-h-[700px] w-screen bg-[#D9D9D9] dark:bg-[#1B1B1B] flex flex-col gap-6"
     >
-        <NavBar
-            class=""
-            :activePage="activePage"
-            @update:activePage="activePageUpdate"
-        />
         <Home id="home" />
     </div>
 </template>

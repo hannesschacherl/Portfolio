@@ -1,6 +1,6 @@
 <template>
     <div
-        class="w-screen h-screen flex-col text-black grid grid-cols-1 md:grid-cols-2 md:items-center md:justify-center"
+        class="w-screen max-h-[800px] flex-col text-black grid grid-cols-1 md:grid-cols-2 md:items-center md:justify-center"
     >
         <div class="w-full h-full flex md:items-center justify-center">
             <form
